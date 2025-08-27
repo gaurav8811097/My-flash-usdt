@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Illuminati Flash Coin Store</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    background: #000000;
+    color: #ff4444;
+    text-align: center;
+    overflow-x: hidden;
+  }
+  
+  header {
+    padding: 20px;
+    background: #000;
+    color: #ff0000;
+    font-size: 26px;
+    font-weight: bold;
+    text-shadow: 0 0 20px red, 0 0 40px darkred;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .packs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 50px auto;
+    max-width: 1000px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card {
+    background: #111;
+    border: 2px solid red;
+    border-radius: 16px;
+    padding: 25px;
+    width: 250px;
+    box-shadow: 0 0 25px rgba(255,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px rgba(255,0,0,0.9);
+  }
+  .card h2 { 
+    color: #ff2222; 
+    text-shadow: 0 0 10px red;
+  }
+  .hidden { display: none; }
+
+  .network-btn {
+    background: #ff0000;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px 28px;
+    margin: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255,0,0,0.6);
+    position: relative;
+    z-index: 1;
+  }
+  .network-btn:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255,0,0,0.9);
+  }
+
+  .wallet-title {
+    display: block;
+    text-align: center;
+    margin: 15px auto 5px auto;
+    font-size: 15px;
+    color: #ff4444;
+    font-weight: bold;
+    text-shadow: 0 0 10px red;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wallet-box {
+    background: #111;
+    color: #ff0000;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 12px auto;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    width: 90%;
+    border: 1px solid red;
+    box-shadow: 0 0 15px red;
+    position: relative;
+    z-index: 1;
+  }
+
+  .copy-btn {
+    margin: 10px auto 20px auto;
+    display: block;
+    background: #ff0000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 0 15px red;
+    position: relative;
+    z-index: 1;
+  }
+  .copy-btn:hover {
+    background: #cc0000;
+    box-shadow: 0 0 25px red;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    margin: 15px auto 5px auto;
+    width: 90%;
+    font-size: 14px;
+    color: #ff4444;
+    text-shadow: 0 0 6px red;
+    position: relative;
+    z-index: 1;
+  }
+
+  input {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid red;
+    border-radius: 8px;
+    background: #000;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 0 12px rgba(255,0,0,0.6);
+    position: relative;
+    z-index: 1;
+  }
+
+  button.submit-btn {
+    margin-top: 20px;
+    background: #ff0000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    font-size: 15px;
+    box-shadow: 0 0 20px red;
+    position: relative;
+    z-index: 1;
+  }
+  button.submit-btn:hover {
+    background: #cc0000;
+    box-shadow: 0 0 30px red;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding: 25px;
+    background: #111;
+    font-size: 14px;
+    color: #ff3333;
+    text-shadow: 0 0 6px red;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Features */
+  .features {
+    margin: 60px auto;
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .features h2 {
+    margin-bottom: 12px;
+    color: #ff0000;
+    text-shadow: 0 0 15px red;
+  }
+  .features p {
+    margin-bottom: 25px;
+    color: #ff4444;
+  }
+  .feature-box {
+    background: #111;
+    border: 2px solid red;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 0 20px rgba(255,0,0,0.6);
+    position: relative;
+    z-index: 1;
+  }
+  .feature-box h3 {
+    text-align: center;
+    color: #ff2222;
+    text-shadow: 0 0 12px red;
+    margin-bottom: 20px;
+  }
+  .feature-box li {
+    margin: 12px 0;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    color: #ff6666;
+  }
+
+  /* Support */
+  .support {
+    margin: 40px auto;
+    padding: 30px;
+    text-align: center;
+    background: #111;
+    border-top: 2px solid red;
+    border-radius: 12px;
+    max-width: 700px;
+    box-shadow: 0 0 20px rgba(255,0,0,0.6);
+    position: relative;
+    z-index: 1;
+  }
+
+  .support h2 {
+    color: #ff2222; 
+    text-shadow: 0 0 12px red;
+    margin-bottom: 20px;
+  }
+
+  .telegram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #cc0000;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 20px red;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .telegram-btn:hover {
+    background: #ff0000;
+    transform: scale(1.08);
+    box-shadow: 0 0 30px red;
+  }
+
+  .telegram-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Modal */
+  #imageModal.hidden { display: none; }
+  #imageModal {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+  }
+  #modalImage {
+    max-width: 90%;
+    max-height: 90%;
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+  }
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+  The Illuminati Flash Coin Store
+  
+</header>
+
+<section id="buyNowSection" class="packs">
+  <div class="card" onclick="showChains('Starter Pack', 5000, 50.00)">
+    <h2>Starter Pack</h2>
+    <p>5000 Flash USDT</p>
+    <p>Price: $50.00</p>
+  </div>
+  <div class="card" onclick="showChains('Pro Pack', 10000, 95.00)">
+    <h2>Pro Pack</h2>
+    <p>10,000 Flash USDT</p>
+    <p>Price: $95.00</p>
+  </div>
+  <div class="card" onclick="showChains('VIP Pack', 50000, 400.00)">
+    <h2>VIP Pack</h2>
+    <p>50,000 Flash USDT</p>
+    <p>Price: $400.00</p>
+  </div>
+</section>
+
+<section id="featuresSection" class="features">
+  <h2>⚡ Features of our Flash USDT ⚡</h2>
+  <p>Experience next level digital transactions.</p>
+  
+  <div class="feature-box">
+    <h3>[ Our Flash USDT Features ]</h3>
+    <ul>
+      <li>1) Wallet to wallet transfer max 60</li>
+      <li>2) Expiry 140 - 160 days</li>
+      <li>3) Resell back to the Order</li>
+      <li>4) Equivalent to real USDT</li>
+      <li>5) Works in P2P</li>
+      <li>6) Fully Tradable</li>
+    </ul>
+  </div>
+</section>
+
+<section id="supportSection" class="support">
+  <h2>Need Help? Our Support</h2>
+  <a href="https://t.me/Flashcoinofficialstore" target="_blank" class="telegram-btn">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-logo">
+    Join Telegram Chat
+  </a>
+</section>
+
+<section id="chainSelection" class="hidden">
+  <h2 id="selectedPack">Choose your USDT</h2>
+  <button class="network-btn" onclick="showPaymentForm('TRC20')">TRC20 (Tron)</button>
+  <button class="network-btn" onclick="showPaymentForm('ERC20')">ERC20 (Ethereum)</button>
+  <button class="network-btn" onclick="showPaymentForm('BEP20')">BEP20 (Binance)</button>
+</section>
+
+<section id="paymentForm" class="hidden">
+  <h2 id="formTitle">Send Payment Here</h2>
+  <div id="walletContainer"></div>
+
+  <label>Enter Transfer USDT</label>
+  <input type="number" id="amountInput" step="0.01">
+
+  <label>Transaction ID</label>
+  <input type="text" id="txid" placeholder="Enter Transaction ID">
+
+  <label>Enter Your Wallet Address</label>
+  <input type="text" id="userWallet" placeholder="Enter Your Wallet Address">
+
+  <label>Your Email</label>
+  <input type="email" id="email" placeholder="Enter Your Email">
+
+  <label>Upload Payment Proof (Screenshot)</label>
+  <input type="file" id="paymentProof" accept="image/*" onchange="previewImage(event)">
+
+  <div id="previewContainer" style="margin-top: 15px; display:none;">
+    <p style="color:#ff4444;">Preview:</p>
+    <img id="previewImage" src="" alt="Payment Proof" style="max-width:200px; border:2px solid red; border-radius:8px; cursor:pointer; box-shadow:0 0 12px red;">
+  </div>
+
+  <button class="submit-btn" onclick="submitTx()">Submit</button>
+</section>
+
+<!-- Image Modal -->
+<div id="imageModal" class="hidden">
+  <img id="modalImage" src="">
+</div>
+<script>
+// === Original Functions ===
+let selectedPackName = "";
+let selectedPrice = 0;
+let currentChain = "";
+
+function showChains(packName, amount, price){
+  selectedPackName = packName;
+  selectedPrice = price;
+
+  document.getElementById('buyNowSection').classList.add('hidden');
+  document.getElementById('featuresSection').classList.add('hidden');
+  document.getElementById('supportSection').classList.add('hidden');
+  document.getElementById('mainHeader').classList.add('hidden'); 
+
+  document.getElementById('chainSelection').classList.remove('hidden');
+  document.getElementById('selectedPack').innerText = "Choose your USDT";
+}
+
+function showPaymentForm(chain){
+  currentChain = chain;
+  document.getElementById('chainSelection').classList.add('hidden');
+  document.getElementById('paymentForm').classList.remove('hidden');
+
+  let walletAddress = "";
+  let walletTitle = "";
+  if(chain=="TRC20"){
+    walletTitle = "Send Me USDT Below Address (TRC20)";
+    walletAddress = "TAnzq5jeTfJVaqQxmP4aQEffpkh3xViMjB";
+  }
+  if(chain=="ERC20"){
+    walletTitle = "Send Me USDT Below Address (ERC20)";
+    walletAddress = "0xBd36Fa3C6A723d3795e0B1b3Cb0dd7d50d28C5b7";
+  }
+  if(chain=="BEP20"){
+    walletTitle = "Send Me USDT Below Address (BEP20)";
+    walletAddress = "0xBd36Fa3C6A723d3795e0B1b3Cb0dd7d50d28C5b7";
+  }
+
+  document.getElementById('formTitle').innerText = `Payment for ${selectedPackName} (${currentChain})`;
+
+  document.getElementById('walletContainer').innerHTML = `
+    <p class="wallet-title">${walletTitle}</p>
+    <div class="wallet-box" id="walletBox">${walletAddress}</div>
+    <button class="copy-btn" onclick="copyAddress('${walletAddress}')">Copy Address</button>
+  `;
+
+  document.getElementById('amountInput').value = selectedPrice.toFixed(2);
+}
+
+function copyAddress(address){
+  navigator.clipboard.writeText(address);
+  alert("Wallet Address Copied: " + address);
+}
+
+function submitTx(){
+  let txid = document.getElementById('txid').value;
+  let email = document.getElementById('email').value;
+  let wallet = document.getElementById('userWallet').value;
+  let amount = document.getElementById('amountInput').value;
+  let file = document.getElementById('paymentProof').files[0];
+
+  if(!txid || !email || !wallet || !amount || !file){
+    alert("Please fill all required fields and upload payment proof.");
+    return;
+  }
+
+  alert(`Payment Submitted!\nPack: ${selectedPackName} (${currentChain})\nTxID: ${txid}\nWallet: ${wallet}\nAmount: ${amount} USDT\nEmail: ${email}\nProof: Uploaded`);
+  location.reload();
+}
+
+// Preview + Modal
+function previewImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('previewImage').src = e.target.result;
+      document.getElementById('previewContainer').style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+document.getElementById('previewImage').addEventListener('click', function() {
+  document.getElementById('imageModal').classList.remove('hidden');
+  document.getElementById('modalImage').src = this.src;
+});
+
+document.getElementById('imageModal').addEventListener('click', function() {
+  this.classList.add('hidden');
+  document.getElementById('modalImage').style.transform = "scale(1)";
+});
+
+document.getElementById('modalImage').addEventListener('wheel', function(e) {
+  e.preventDefault();
+  let scale = this.style.transform.replace(/[^0-9.]/g, "") || 1;
+  scale = parseFloat(scale);
+
+  if (e.deltaY < 0) { scale += 0.1; }
+  else { scale = Math.max(0.5, scale - 0.1); }
+
+  this.style.transform = `scale(${scale})`;
+});
+
+// === Haunted Creepy Spider Webs + Shadowy Fog Background ===
+const webCanvas = document.createElement("canvas");
+webCanvas.id = "webCanvas";
+webCanvas.style.position = "fixed";
+webCanvas.style.top = "0";
+webCanvas.style.left = "0";
+webCanvas.style.width = "100%";
+webCanvas.style.height = "100%";
+webCanvas.style.zIndex = "-1";
+webCanvas.style.pointerEvents = "none";
+document.body.appendChild(webCanvas);
+
+const ctx = webCanvas.getContext("2d");
+
+function resizeCanvas(){
+  webCanvas.width = window.innerWidth;
+  webCanvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let webs = [];
+while(webs.length < 4){
+  let x = 100 + Math.random()*(webCanvas.width-200);
+  let y = 100 + Math.random()*(webCanvas.height-200);
+  let tooClose = webs.some(w => Math.hypot(w.x-x, w.y-y) < 200);
+  if(!tooClose){
+    webs.push({
+      x: x,
+      y: y,
+      radius: 90 + Math.random()*80,
+      swayAngle: Math.random()*Math.PI*2,
+      swaySpeed: (Math.random()*0.0002 + 0.00005)*(Math.random() > 0.5 ? 1 : -1),
+      rotation: Math.random()*Math.PI*2,
+      rotationSpeed: (Math.random()*0.00003 + 0.00001)*(Math.random() > 0.5 ? 1 : -1),
+      irregular: Math.random()*0.5 + 0.5,
+      glowPhase: Math.random()*Math.PI*2,
+      stretchPhase: Math.random()*Math.PI*2
+    });
+  }
+}
+
+// Shadow/fog particles
+let fogParticles = [];
+for(let i=0;i<60;i++){
+  fogParticles.push({
+    x: Math.random()*webCanvas.width,
+    y: Math.random()*webCanvas.height,
+    radius: 20 + Math.random()*40,
+    alpha: 0.02 + Math.random()*0.04,
+    phase: Math.random()*Math.PI*2
+  });
+}
+
+function drawWeb(web){
+  ctx.save();
+  ctx.translate(web.x, web.y);
+  ctx.rotate(web.rotation + Math.sin(web.swayAngle)*0.05);
+
+  const glowAlpha = 0.08 + 0.05*Math.sin(Date.now()*0.002 + web.glowPhase);
+  ctx.strokeStyle = `rgba(255,0,0,${glowAlpha})`;
+  ctx.shadowColor = `rgba(255,0,0,${glowAlpha*2})`;
+  ctx.shadowBlur = 10;
+  ctx.lineWidth = 1.3;
+
+  const stretch = 0.95 + 0.1*Math.sin(Date.now()*0.001 + web.stretchPhase);
+
+  let lines = 8;
+  let rings = 5;
+  for(let r=1; r<=rings; r++){
+    ctx.beginPath();
+    for(let i=0; i<=lines; i++){
+      let angle = i*(Math.PI*2/lines);
+      let radius = r*web.radius/rings * (0.9 + Math.random()*0.2*web.irregular) * stretch;
+      let px = Math.cos(angle)*radius;
+      let py = Math.sin(angle)*radius;
+      if(i===0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  for(let i=0;i<lines;i++){
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    let angle = i*(Math.PI*2/lines);
+    ctx.lineTo(Math.cos(angle)*web.radius*stretch, Math.sin(angle)*web.radius*stretch);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawFog(){
+  fogParticles.forEach(p=>{
+    const alphaPulse = p.alpha + 0.01*Math.sin(Date.now()*0.002 + p.phase);
+    const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+    grd.addColorStop(0, `rgba(255,0,0,${alphaPulse})`);
+    grd.addColorStop(1, `rgba(0,0,0,0)`);
+    ctx.fillStyle = grd;
+    ctx.fillRect(p.x-p.radius, p.y-p.radius, p.radius*2, p.radius*2);
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,webCanvas.width, webCanvas.height);
+  drawFog();
+  webs.forEach(w=>{
+    w.swayAngle += w.swaySpeed;
+    w.rotation += w.rotationSpeed;
+    drawWeb(w);
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
